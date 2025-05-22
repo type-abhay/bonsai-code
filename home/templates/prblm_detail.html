@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,10 +8,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="/home/problems" class="nav-title">Problem Portal</a>
+        <a href="/dashboard" class="nav-link">Dashboard</a>
+        <!-- <a href="/create" class="nav-link">Create Problem</a> -->
+      </div>
+      <div class="nav-right">
+        <a href="http://127.0.0.1:8000/auth/logout"><button class="logout-btn">Logout</button></a>
+      </div>
+    </nav>        
+    <div class="problems-container">
     <h1>{{req_problem_id.prblmname}}</h1>
     <h2>Probelm Statement:</h2>
-    <p>
+    <p class="statement-container">
       {{req_problem_id.statement}}
     </p>
+    </div>
+    <!-- <div class="headClass">
+      <a href="http://127.0.0.1:8000/auth/logout"><button class="login-btn">Logout</button></a>
+    </div> -->
   </body>
 </html>
