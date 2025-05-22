@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Probelm Details Page</title>
+    <link rel="stylesheet" href="{% static 'home/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <h1>{{req_problem_id.prblmname}}</h1>
+    <h2>Probelm Statement:</h2>
+    <p>
+      {{req_problem_id.statement}}
+    </p>
+  </body>
+</html>

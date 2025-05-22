@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Problems Page</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <link rel="icon" href="favicon.png" />
+    <link rel="stylesheet" href="{% static 'home/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <header> 
+    
+  </header>
+  
+  </head>
+  <body>
+    <div class="problems-container">
+    <h1>List Of Problems</h1>
+    <div class="problem-container">
+    <ul>
+      {% for prlls in all_prlls %}
+
+      <li><a href="/home/problems/{{prlls.id}}/">{{prlls.prblmname}}</a></li>
+
+      {% endfor %}
+    </ul>
+    </div>
+    </div>
+    <div class="headClass">
+      <a href="http://127.0.0.1:8000/auth/logout"><button class="login-btn">Logout</button></a>
+    </div>
+  </body>
+</html>
