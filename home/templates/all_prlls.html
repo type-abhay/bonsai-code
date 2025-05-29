@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="" />
     <link rel="icon" href="favicon.png" />
-    <link rel="stylesheet" href="{% static 'home/style.css' %}">
+    <link rel="stylesheet" href="{% static 'home/problist_style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
   <header> 
     
@@ -18,14 +18,15 @@
     <nav class="navbar">
       <div class="nav-left">
         <a href="/home/problems" class="nav-title">Problem Portal</a>
-        <a href="/dashboard" class="nav-link">Dashboard</a>
+        <a href="/home/edit-profile" class="nav-link">Dashboard</a>
         <!-- <a href="/create" class="nav-link">Create Problem</a> -->
       </div>
       <div class="nav-right">
         <a href="http://127.0.0.1:8000/auth/logout"><button class="logout-btn">Logout</button></a>
       </div>
     </nav>    
-    <div class="problems-container">
+
+    <div class="outer-container">
     <h1>List Of Problems</h1>
     <div class="problem-container">
     <ul>

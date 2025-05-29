@@ -13,7 +13,7 @@
     align-items: center;
   }
   
-  .problems-container {
+  .outer-container {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     padding: 50px;
@@ -24,6 +24,7 @@
     color: white;
     transition: 0.3s ease;
     justify-content: center;
+    margin-top: 100px;
     align-items: center;
   }
 
@@ -31,7 +32,7 @@
     background: rgba(255, 255, 255, 0.5);
     border-radius: 16px;
     padding: 30px;
-    width: 950px;
+    width: 900px;
     backdrop-filter: blur(5px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     color: white;
@@ -41,18 +42,18 @@
   }
   
   
-  .problems-container h1 {
+  .outer-container h1 {
     text-align: center;
     margin-bottom: 24px;
     font-weight: 500;
   }
 
-  .problems-container h2 {
+  .outer-container h2 {
     text-align: left;
     margin-bottom: 16px;
     font-weight: 500;
   }
-  .problems-container h3 {
+  .outer-container h3 {
     text-align: center;
     margin-bottom: 24px;
     font-weight: 500;
@@ -62,6 +63,9 @@
     margin-bottom: 10px;
     font-weight: 230;
   }
+  
+  /* DETAILS PAGE */
+
   .statement-container {
     text-align: left;
     margin-bottom: 20px;
@@ -141,8 +145,3 @@
   .logout-btn:hover {
     background: #e73b4e;
   }
-
-  .problems-container {
-    margin-top: 100px;
-  }
-  
