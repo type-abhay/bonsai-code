@@ -2,3 +2,7 @@ db.sqlite3
 migrations
 __pycache__
 .DS_Store
+tests
+outputs
+inputs
+codes

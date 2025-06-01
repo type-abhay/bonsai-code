@@ -7,29 +7,13 @@
     <link rel="stylesheet" href="{% static 'home/prblm-detail-style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
   </head>
-  <style>
-    textarea {
-    width: 100%;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: small;
-    height: 130px;
-    margin-bottom: 5px;
-    padding: 6px 10px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-
-    background-color: #f8f8f8;
-    font-size: 16px;
-    resize: none;
-}
-  </style>
   <body>
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="nav-left">
         <a href="/home/problems" class="nav-title">Problem Portal</a>
         <a href="/home/edit-profile" class="nav-link">Dashboard</a>
+        <a href="/home/compiler" class="nav-link">Compiler</a>
       </div>
       <div class="nav-right">
         <a href="http://127.0.0.1:8000/auth/logout"><button class="logout-btn">Logout</button></a>
@@ -47,7 +31,14 @@
     <div class="Compiler">
       <form method="post">
       {% csrf_token %}
-      {{ passform.as_p }}
+      <p>Language:</p>{{ passform.language }}
+      <div class="code-container">
+        {{ passform.code }}
+      </div>
+      <div class="input-container">
+        <p>Input:</p>
+        {{ passform.input_data }}
+      </div>
         <button type="submit" name="RUN" class="run-btn">
           Run Code
         </button>
@@ -56,7 +47,6 @@
         </button>
       </form>
     </div>
-
     <!-- <div class="headClass">
       <a href="http://127.0.0.1:8000/auth/logout"><button class="login-btn">Logout</button></a>
     </div> -->

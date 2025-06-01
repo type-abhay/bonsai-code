@@ -1,6 +1,5 @@
 {% load static %} 
 <!-- <link rel="stylesheet" href="{% static 'home/result-style.css' %}"> -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,6 +14,7 @@
       <div class="nav-left">
         <a href="/home/problems" class="nav-title">Problem Portal</a>
         <a href="/home/edit-profile" class="nav-link">Dashboard</a>
+        <a href="/home/compiler" class="nav-link">Compiler</a>
       </div>
       <div class="nav-right">
         <a href="http://127.0.0.1:8000/auth/logout"><button class="logout-btn">Logout</button></a>
@@ -22,22 +22,33 @@
     </nav>   
     <!-- PAGE -->
      
-    <div class="outer-container">
-        <h1>Execution Result</h1>
-        <div class="code-container">
-            <p><strong>Language:</strong> {{ submission.language }}</p>
-            <p><strong>Code:</strong> <pre>{{ submission.code }}</pre></p>
-            <div class="io-container">
-                <p><strong>Input:</strong> <pre>{{ submission.input_data }}</pre></p>
+    <div class="execution-container">
+        <h1 class="title">Execution Result</h1>
+
+        <div class="content-grid">
+          <div class="content-box">
+                <div class="box-content">
+                  <p><strong>Language:</strong> {{ submission.language }}</p>
+                  <p><strong>Code:</strong> 
+                  <pre>{{ submission.code }}</pre></p>
+                </div>
+              </div>
+
+          <div class="content-box">
+            <div class="box-content">
+              <p><strong>Input:</strong> <pre>{{ submission.input_data }}</pre></p>
             </div>
-            <div class="verdict-container">
-            <p><strong>Output:</strong> <pre>{{ submission.output_data }}</pre></p>
-            </div>
-            <a href="">Run Again</a>
-            <button type="submit" class="run-btn">Run Again</button>
+          </div>
+              
+          <div class="content-box">
+              <div class="box-content">
+                <p><strong>Output:</strong> <pre>{{ submission.output_data }}</pre></p>
+              </div>
+          </div>        
         </div>
+        
+      <a href=""> <button class="run-btn">Run Again</button> </a>        
     </div>
   </body>
 </html>
-
 

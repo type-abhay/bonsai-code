@@ -95,6 +95,28 @@ def prblm_page(request,req_problem_id):
     return HttpResponse(template.render(context,request))   
 
 
+def only_comp(request):
+    if request.method == "POST":
+        form = CodeSubmissionForm(request.POST)
+        if form.is_valid():
+            submission = form.save()
+            print(submission.language)
+            print(submission.code)                
+            output = run_code(submission.language, submission.code, submission.input_data)
+            submission.output_data = output
+            submission.save()
+            return render(request, "result.html", {"submission": submission})
+
+    else:
+        form = CodeSubmissionForm()
+        context = {
+        'passform': form,
+        }
+        
+    template = loader.get_template('only-comp.html')
+    return HttpResponse(template.render(context,request))   
+
+
 
 @login_required
 def prblm_detail(request,req_problem_id):

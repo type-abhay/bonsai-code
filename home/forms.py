@@ -11,6 +11,10 @@ LANGUAGE_CHOICES = [
 
 class CodeSubmissionForm(forms.ModelForm):
     language = forms.ChoiceField(choices=LANGUAGE_CHOICES)
+    
+    def __init__(self, *args, **kwargs):
+        super(CodeSubmissionForm, self).__init__(*args, **kwargs)
+        self.fields['code'].widget.attrs['placeholder'] = 'Write Code here'
 
     class Meta:
         model = CodeSubmission

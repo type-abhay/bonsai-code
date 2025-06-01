@@ -13,6 +13,7 @@
       <div class="nav-left">
         <a href="/home/problems" class="nav-title">Problem Portal</a>
         <a href="/home/edit-profile" class="nav-link">Dashboard</a>
+        <a href="/home/compiler" class="nav-link">Compiler</a>
       </div>
       <div class="nav-right">
         <a href="http://127.0.0.1:8000/auth/logout"><button class="logout-btn">Logout</button></a>
@@ -21,7 +22,7 @@
     <!-- NAVBAR-->
 
 
-{% block content %}
+    {% block content %}
     <!-- <div class="row my-3 p-3">
         <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }} " style="cursor: pointer;"/>
     </div> -->
@@ -37,7 +38,8 @@
             </button>
         </div>  
     {% endif %}
-    <div class="problems-container">
+    
+    <div class="outer-container">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="details-cont">
