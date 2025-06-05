@@ -2,56 +2,79 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-      font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-  }
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
 
-  
-  body {
+body {
     min-height: 100vh;
-    padding-top: 100px;
-    /* background: linear-gradient(135deg, #1E1E24, #11141b); */
     background-color: black;
+    padding-top: 100px; 
+}
+
+/* Main container - vertical stacking */
+.main-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .outer-container {
+    flex-direction: column;
+    gap: 10px;
+    padding: 9px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Profile section */
+.profile-section {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+/* Heatmap section */
+.heatmap-section {
+    width: 100%;
+}
+
+.heatmap-container {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     padding: 25px;
-    width: 98%;
-    height: 100%;
     backdrop-filter: blur(15px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     color: white;
     transition: 0.3s ease;
-    justify-content: center;  
-    align-items: center;
-  }  
-  
-  .outer-container h1 {
+}
+
+.outer-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 25px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    color: white;
+    transition: 0.3s ease;
+}
+
+.outer-container h1 {
     text-align: center;
     margin-bottom: 24px;
     font-weight: 500;
-  }
+}
 
-  .outer-container h2 {
+.outer-container h2, .heatmap-container h2 {
     text-align: left;
     margin-bottom: 16px;
     font-weight: 500;
-  }
-  .outer-container h3 {
+}
+
+.outer-container h3 {
     text-align: center;
     margin-bottom: 24px;
     font-weight: 500;
-  }
-  /* DETAILS PAGE */
+}
 
-  .details-cont {
+/* DETAILS PAGE */
+.details-cont {
     background: rgba(255, 255, 255, 0.1);
     padding: 25px;
     backdrop-filter: blur(15px);
@@ -61,33 +84,28 @@
     text-align: left;
     margin-bottom: 20px;
     font-weight: 50;
-  }
-  
-  .bio-cont {
+}
+
+.bio-cont {
     margin-top: 20px;
     font-weight: 50;
-  }
+}
 
-  .footer-text {
+.footer-text {
     text-align: center;
     margin-top: 16px;
     font-size: 14px;
     color: rgba(255, 255, 255, 0.7);
-  }
-  
-  .footer-text a {
+}
+
+.footer-text a {
     color: #00c6ff;
     text-decoration: none;
     font-weight: 500;
-  }
-  
-  @media (max-width: 400px) {
-    .login-container {
-      width: 90%;
-      padding: 30px;
-    }
-  }
-  .navbar {
+}
+
+/* Navbar styles */
+.navbar {
     padding: 20px 40px;
     width: 98%;
     background: rgba(255, 255, 255, 0.1);
@@ -102,34 +120,34 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
-  }
-  
-  .nav-left {
+}
+
+.nav-left {
     display: flex;
     align-items: center;
     gap: 20px;
-  }
-  
-  .nav-title {
+}
+
+.nav-title {
     color: white;
     font-size: 24px;
     font-weight: 600;
     text-decoration: none;
-  }
-  
-  .nav-link {
+}
+
+.nav-link {
     color: white;
     font-size: 16px;
     font-weight: 400;
     text-decoration: none;
     transition: color 0.3s;
-  }
-  
-  .nav-link:hover {
+}
+
+.nav-link:hover {
     color: #00c6ff;
-  }
-  
-  .logout-btn {
+}
+
+.logout-btn {
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
@@ -139,12 +157,24 @@
     font-size: 14px;
     cursor: pointer;
     transition: background 0.3s ease;
-  }
-  
-  .logout-btn:hover {
+}
+
+.logout-btn:hover {
     background: #e73b4e;
-  }
-  .run-btn {
+}
+
+.small mb-1{
+    margin-bottom: 5px;
+}
+.run-btn:hover {
+    background: #1b9e5f;
+}
+
+.reset-btn:hover {
+    background: #e73b4e;
+}
+
+.edit-btn {
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
@@ -156,11 +186,31 @@
     font-size: 14px;
     cursor: pointer;
     transition: background 0.3s ease;
+    position: absolute;
+    top: 20px;
+    right: 20px;
   }
   
-  .run-btn:hover {
-    background: #1b9e5f;
+  .edit-btn:hover {
+    background: #9e1b5f;
   }
-
-  
-  
+/* Responsive design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+        width: 95%;
+    }
+    
+    .nav-left {
+        gap: 15px;
+    }
+    
+    .nav-title {
+        font-size: 20px;
+    }
+    
+    .main-container {
+        padding: 15px;
+        gap: 15px;
+    }
+}

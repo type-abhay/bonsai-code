@@ -8,7 +8,9 @@
     <meta name="description" content="" />
     <link rel="icon" href="favicon.png" />
     <link rel="stylesheet" href="{% static 'home/problist_style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    </style>
   <header> 
     
   </header>
@@ -18,26 +20,30 @@
     <nav class="navbar">
       <div class="nav-left">
         <a href="/home/problems" class="nav-title">Problem Portal</a>
-        <a href="/home/edit-profile" class="nav-link">Dashboard</a>
         <a href="/home/compiler" class="nav-link">Compiler</a>
+        <a href="/home/dashboard" class="nav-link">Dashboard</a>
+        {% if user.role == 'setter' %}
+        <a href="/home/create-combined" class="nav-link">Create Problem</a>
+        {% endif %}        
       </div>
       <div class="nav-right">
-        <a href="http://127.0.0.1:8000/auth/logout"><button class="logout-btn">Logout</button></a>
+        <a href="/auth/logout/"><button class="logout-btn">Logout</button></a>
       </div>
     </nav>    
 
     <div class="outer-container">
     <h1>List Of Problems</h1>
     <div class="problem-container">
-    <ul>
+    <ol>
       <!-- CHOOOOOD DE ISKO AISE KE AISA :) -->
       {% for prlls in all_prlls %}
-
-      <li><a href="/home/problems/{{prlls.id}}/">{{prlls.prblmname}}</a></li>
-
+      <hr>
+      <br>
+      <li><a href="/home/problems/{{prlls.id}}/">{{prlls.prblmname}}</a></li> 
       {% endfor %}
+      <hr>
       <!-- CHOOOOOD DE ISKO AISE KE AISA :) KA END -->
-    </ul>
+    </ol>
     </div>
     </div>
     <!-- <div class="headClass">

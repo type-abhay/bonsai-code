@@ -8,9 +8,15 @@
   font-style: normal;
   }
 
+  p{
+    word-wrap: break-word;
+    overflow-x: scroll;
+  }
+
   body {
     min-height: 100vh;
     padding-top: 100px;
+    /* background: linear-gradient(135deg, #1E1E24, #11141b); */
     background-color: black;
     display: flex;
     justify-content: center;
@@ -87,9 +93,8 @@
     cursor: pointer;
     transition: background 0.3s ease;
     position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 20px;
+    right: 20px;
   }
   
   .run-btn:hover {

@@ -2,15 +2,19 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
   }
   
-  
+ 
   body {
     min-height: 100vh;
     background-color: black;
     display: flex;
     justify-content: center;
+    padding-top: 100px;
     align-items: center;
   }
   
@@ -129,18 +133,22 @@
       padding: 30px;
     }
   }
+
+  /* NAVBAR */
   .navbar {
     padding: 20px 40px;
     width: 98%;
     background: rgba(255, 255, 255, 0.1);
-    margin-top: 8px;
+    margin: 8px auto;
     border-radius: 16px;
     backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 100;
   }
   
@@ -169,6 +177,7 @@
     color: #00c6ff;
   }
   
+  /* BUTTONS */
   .logout-btn {
     padding: 10px 20px;
     border: none;
@@ -190,6 +199,7 @@
     border-radius: 8px;
     margin-top: 5px;
     margin-right: 10px;
+    /* background: #1b639e; */
     background: #4d4d5b;
     color: white;
     font-weight: 600;
@@ -199,6 +209,7 @@
   }
   
   .run-btn:hover {
+    /* background: #4d4d5b; */
     background: #1b639e;
   }
 
@@ -208,6 +219,7 @@
     border-radius: 8px;
     margin-top: 5px;
     margin-right: 10px;
+    /* background: #1b9e5f; */
     background: #4d4d5b;
     color: white;
     font-weight: 600;
@@ -217,5 +229,27 @@
   }
   
   .submit-btn:hover {
+    /* background: #4d4d5b; */
     background: #1b9e5f;
+  }
+
+  .AI-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 5px;
+    margin-right: 10px;
+    /* background: #c12424; */
+    background: #4d4d5b;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .AI-btn:hover {
+    /* background: #4d4d5b; */
+    background:#008080;
+
   }

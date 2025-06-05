@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{% static 'home/dash-style.css' %}">
+    <!-- HEATMAP -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- v6 is also supported -->
+    <!-- FONT PART -->
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    </style>
+    <title>Profile</title>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="/home/problems" class="nav-title">Problem Portal</a>
+        <a href="/home/compiler" class="nav-link">Compiler</a>
+        <a href="/home/dashboard" class="nav-link">Dashboard</a>
+      </div>
+      <div class="nav-right">
+        <a href="/auth/logout"><button class="logout-btn">Logout</button></a>
+      </div>
+    </nav>  
+    <!-- NAVBAR-->
+
+    {% block content %}
+    <div class="main-container">
+        <div class="profile-section">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="details-cont">
+                    <div class="col-md-5">
+                        <div class="page-containers">
+                            <label class="small mb-1">Username:</label>
+                                {{ user.username }}
+                            <br>
+                            <label class="small mb-1">Email:</label>
+                                {{ user.email }}
+                        </div>
+                        <div class="bio-cont">
+                            <label class="small mb-1">Bio:</label> {{ user.bio }}
+                        </div>
+                        <a href="/home/edit-profile"><button type="button" class="edit-btn">Edit</button></a>
+                    </div>
+                </div>
+                <br><br>
+                
+            </form>
+        </div>
+        
+        <div class="heatmap-section">
+            <div class="heatmap-container">
+                <h2>User Submission Heatmap</h2>
+                {{ plot_div|safe }}
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+</html>

@@ -4,8 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Result Page</title>
-    <link rel="stylesheet" href="{% static 'home/result-style.css' %}">
+    <title>AI Review</title>
+    <link rel="stylesheet" href="{% static 'home/airev-style.css' %}">
     <!-- FONT PART -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,32 +26,15 @@
     <!-- PAGE -->
      
     <div class="execution-container">
-        <h1 class="title">Execution Result</h1>
-
-        <div class="content-grid">
-          <div class="content-box">
-                <div class="box-content">
-                  <p><strong>Language:</strong> {{ submission.language }}</p>
-                  <p><strong>Code:</strong> 
-                  <pre>{{ submission.code }}</pre></p>
-                </div>
-              </div>
-
-          <div class="content-box">
-            <div class="box-content">
-              <p><strong>Input:</strong> <pre>{{ submission.input_data }}</pre></p>
-            </div>
-          </div>
-              
+        <h1 class="title">AI Review</h1>
+        <a href=""> <button class="run-btn">Back to Problem</button> </a>         
           <div class="content-box">
               <div class="box-content">
                 <p><strong>Output:</strong> <pre>{{ submission.output_data }}</pre></p>
               </div>
           </div>        
-        </div>
-        
-      <a href=""> <button class="run-btn">Run Again</button> </a>        
-    </div>
+        </div> 
+      </div>
   </body>
 </html>
 

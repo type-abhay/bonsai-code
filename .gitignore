@@ -6,3 +6,4 @@ tests
 outputs
 inputs
 codes
+.env

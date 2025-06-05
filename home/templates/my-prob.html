@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Problems Page</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <link rel="icon" href="favicon.png" />
+    <link rel="stylesheet" href="{% static 'home/myprob-style.css' %}">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    </style>
+  <header> 
+    
+  </header>
+  
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="/home/problems" class="nav-title">Problem Portal</a>
+        <a href="/home/compiler" class="nav-link">Compiler</a>
+        <a href="/home/dashboard" class="nav-link">Dashboard</a>
+        {% if user.role == 'setter' %}
+        <a href="/home/create-combined" class="nav-link">Create Problem</a>
+        {% endif %}        
+      </div>
+      <div class="nav-right">
+        <a href="/auth/logout/"><button class="logout-btn">Logout</button></a>
+      </div>
+    </nav>    
+
+    <div class="main-container">
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="details-cont">
+                    <div class="col-md-5">
+                        <div class="page-containers">
+                            <label class="small mb-1">Username:</label>
+                                {{ user.username }}
+                            <br>
+                            <label class="small mb-1">Email:</label>
+                                {{ user.email }}
+                        </div>
+                        <div class="bio-cont">
+                            <label class="small mb-1">Bio:</label> {{ user.bio }}
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <a href="/home/edit-profile"><button type="button" class="edit-btn">Edit</button></a>
+            </form>
+        </div>
+        
+        <!-- Problems Section - Now separate from profile -->
+        <div class="problems-section">
+            <h2>Your Problems</h2>
+            <hr>
+            <br>
+            <div class="problem-container">
+                <ul>
+                    {% for problem in problems %}
+                    <li>
+                        <h3><a href="/home/problems/{{problem.id}}/">{{ problem.prblmname }}</a></h3>
+                        <p>Difficulty: {{ problem.difficulty }}</p>
+                    </li>
+                    {% empty %}
+                    <p>You have not created any problems yet.</p>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

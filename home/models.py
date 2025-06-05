@@ -1,10 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import CustomUser
 
-# Create your models here.
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     # avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
     bio = models.TextField()
 
@@ -22,8 +21,16 @@ class test_cases(models.Model):
 
 
 class problems(models.Model):
+    DIFF_CHOICES = [
+        ('easy', 'Easy'),
+        ('medium', 'Medium'),
+        ('hard', 'Hard'),
+    ]
+
     prblmname = models.CharField(max_length = 30)
     statement = models.CharField(max_length=3000)
+    difficulty = models.CharField(max_length=10, choices=DIFF_CHOICES, default='Easy')
+    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     
     def __str__(self):
         return f"{self.prblmname}"
@@ -36,3 +43,8 @@ class CodeSubmission(models.Model):
     input_data = models.TextField(null=True,blank=True)
     output_data = models.TextField(null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)    
+
+
+class UserSubmission(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    submitted_at = models.DateTimeField(auto_now_add=True)

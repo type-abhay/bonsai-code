@@ -2,12 +2,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   }
-  
+ 
   body {
     min-height: 100vh;
-    background: linear-gradient(135deg, #1E1E24, #11141b);
+    background: black;
     display: flex;
     justify-content: center;
     align-items: center;
