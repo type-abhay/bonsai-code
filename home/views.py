@@ -191,6 +191,25 @@ def load_prblms(request):
     template = loader.get_template('all_prlls.html')
     return HttpResponse(template.render(context,request))
 
+@login_required
+def diff_probs(request, difficulty):
+    """Filter problems by difficulty level"""
+    valid_difficulties = [choice[0] for choice in problems.DIFF_CHOICES]
+    
+    if difficulty not in valid_difficulties:
+        raise Http404("Invalid difficulty level")
+    
+    diff_probs = problems.objects.filter(difficulty=difficulty)
+    difficulty_display = dict(problems.DIFF_CHOICES).get(difficulty, difficulty)
+    
+    context = {
+        'all_prlls': diff_probs,
+        'difficulty': difficulty,
+        'difficulty_display': difficulty_display,
+        'page_title': f'{difficulty_display} Problems'
+    }
+    return render(request, 'all_prlls.html', context)
+
 
 @login_required
 def prblm_page(request,req_problem_id):

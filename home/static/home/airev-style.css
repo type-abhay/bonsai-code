@@ -8,11 +8,10 @@
   font-style: normal;
   }
 
-  p{
-    word-wrap: break-word;
-    overflow-x: scroll;
-  }
 
+p {
+    word-wrap: break-word;
+}
   body {
     min-height: 100vh;
     padding-top: 100px;
@@ -37,7 +36,7 @@
     border-radius: 16px;
     padding: 30px;
     position: relative;
-    margin-top: 100px;
+    margin-top: 10px;
 }
 
 .title {
@@ -62,6 +61,8 @@
     min-height: 200px;
     display: flex;
     align-items: flex-start;
+    overflow: hidden;
+    width: 100%;
 }
 
 .box-content {
@@ -69,6 +70,19 @@
     width: 100%;
     font-size: 0.95rem;
     line-height: 1.5;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.box-content pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    margin: 0;
+    font-family: inherit;
 }
 
 .box-content p {

@@ -7,22 +7,7 @@
   font-weight: 400;
   font-style: normal;
   }
-  /* textarea {
-    width: 100%;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: small;
-    height: 130px;
-    margin-bottom: 5px;
-    padding: 6px 10px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    font-size: 16px;
-    resize: none;
-}  */
- 
-
+  
   p {
    display:inline;
 }

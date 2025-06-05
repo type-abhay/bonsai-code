@@ -30,19 +30,142 @@ a {
     margin: 0 auto;
 }
 
-/* Profile section */
+/*Profile Section*/
 .profile-section {
     width: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 30px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-radius: 20px;
+    padding: 0;
     backdrop-filter: blur(15px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-    color: white;
-    transition: 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Problems section - New styling */
+.profile-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(0, 198, 255, 0.1) 0%, rgba(0, 153, 204, 0.05) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.profile-avatar {
+    margin-right: 20px;
+}
+
+.avatar-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #b2efd694 0%, #b2efd694 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 198, 255, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.avatar-initial {
+    font-size: 32px;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.profile-email {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+}
+
+.edit-btn-new {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: rgba(77, 77, 91, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.edit-btn-new:hover {
+    background: rgba(158, 27, 95, 0.8);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(158, 27, 95, 0.3);
+}
+
+.profile-details {
+    padding: 30px;
+    display: grid;
+    gap: 20px;
+}
+
+.detail-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.detail-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+}
+
+.detail-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #b2efd694;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.detail-value {
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    line-height: 1.5;
+}
+
+.bio-card {
+    grid-column: 1 / -1;
+}
+
+.empty-bio {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+
+/* Problems section */
 .problems-section {
     width: 100%;
 }
@@ -220,24 +343,6 @@ a {
 .logout-btn:hover {
     background: #e73b4e;
 }
-
-/* .edit-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    margin-top: 5px;
-    margin-right: 10px;
-    background: #4d4d5b;
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .edit-btn:hover {
-    background: #9e1b5f;
-  } */
 
  .edit-btn {
     padding: 10px 20px;

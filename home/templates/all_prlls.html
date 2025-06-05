@@ -9,12 +9,8 @@
     <link rel="icon" href="favicon.png" />
     <link rel="stylesheet" href="{% static 'home/problist_style.css' %}">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@444&display=swap');
     </style>
-  <header> 
-    
-  </header>
-  
   </head>
   <body>
     <nav class="navbar">
@@ -32,22 +28,30 @@
     </nav>    
 
     <div class="outer-container">
-    <h1>List Of Problems</h1>
-    <div class="problem-container">
-    <ol>
-      <!-- CHOOOOOD DE ISKO AISE KE AISA :) -->
-      {% for prlls in all_prlls %}
-      <hr>
-      <br>
-      <li><a href="/home/problems/{{prlls.id}}/">{{prlls.prblmname}}</a></li> 
-      {% endfor %}
-      <hr>
-      <!-- CHOOOOOD DE ISKO AISE KE AISA :) KA END -->
-    </ol>
+      <h1>List Of Problems</h1>
+      <div class="problem-container">
+        <div class="table-header">
+          <div class="header-item name-column">NAME</div>
+          <div class="header-item difficulty-column">Difficulty</div>
+        </div>
+        <div class="problems-list">
+          {% for prlls in all_prlls %}
+          <div class="problem-row">
+            <div class="problem-number">{{ forloop.counter }}.</div>
+            <div class="problem-name">
+              <a href="/home/problems/{{prlls.id}}/">{{prlls.prblmname}}</a>
+            </div>
+            <div class="problem-difficulty">
+              <a href="{% url 'difficulty_problems' prlls.difficulty %}">
+              <span class="difficulty-badge difficulty-{{prlls.difficulty|lower}}">
+                {{prlls.difficulty|title}}
+              </span>
+            </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
-    </div>
-    <!-- <div class="headClass">
-      <a href="http://127.0.0.1:8000/auth/logout"><button class="login-btn">Logout</button></a>
-    </div> -->
   </body>
 </html>

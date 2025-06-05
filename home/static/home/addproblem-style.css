@@ -25,44 +25,45 @@ a {
 
 /* Navigation Bar */
 .navbar {
-    padding: 20px 40px;
-    width: 98%;
-    background: rgba(255, 255, 255, 0.1);
-    margin-top: 8px;
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 1%;
-    z-index: 100;
+  padding: 20px 40px;
+  width: 98%;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 8px auto;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
 }
 
 .nav-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .nav-title {
-    color: white;
-    font-size: 24px;
-    font-weight: 600;
-    text-decoration: none;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .nav-link {
-    color: white;
-    font-size: 16px;
-    font-weight: 400;
-    text-decoration: none;
-    transition: color 0.3s;
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
 .nav-link:hover {
-    color: #00c6ff;
+  color: #00c6ff;
 }
 
 .logout-btn {
