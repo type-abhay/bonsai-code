@@ -49,9 +49,16 @@
 }
 .problems-container .l h1 {
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   font-weight: 500;
   font-size: 28px;
+}
+.problems-container .l h4 {
+  text-align: left;
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .problems-container h2 {
@@ -63,6 +70,15 @@
 }
 
 .problems-container .r h4 {
+  text-align: right;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.problems-container .r{
   text-align: right;
   margin-bottom: 20px;
   margin-top: 10px;
@@ -92,6 +108,39 @@
   word-break: break-word;
   min-width: 100px;
 }
+
+.difficulty-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: default;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.problems-container a{
+  color: white;
+  text-decoration: none;
+}
+
+.difficulty-easy {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+}
+
+.difficulty-medium {
+  background: linear-gradient(135deg, #FF9800, #f57c00);
+  color: white;
+}
+
+.difficulty-hard {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+  color: white;
+}
+
 /* COMPILERSECTION */
 
   .Compiler {
@@ -111,6 +160,7 @@
     justify-content: center;  
     align-items: center;
   } 
+
 
    .code-container{
     margin-top: 10px;

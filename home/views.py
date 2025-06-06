@@ -192,7 +192,6 @@ def generate_github_style_heatmap(user, year=None):
 
 def load_prblms(request):
     all_prlls = problems.objects.all()
-
     context = {
         'all_prlls':all_prlls,
     }

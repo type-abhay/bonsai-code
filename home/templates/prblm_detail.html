@@ -35,8 +35,18 @@
     <!-- PAGE -->
     <div class="problems-container">
     <div class="topline">
-    <div class="l"><h1>{{req_problem_id.prblmname}}</h1></div>
-    <div class="r"><h4>Created by: {{req_problem_id.created_by}}</h4></div>
+        <div class="l"><h1>{{req_problem_id.prblmname}}</h1>
+        <h4>Created by: {{req_problem_id.created_by}}</h4>
+        </div>
+        <div class="r">
+            <div class="problem-difficulty">
+                <a href="{% url 'difficulty_problems' req_problem_id.difficulty %}">
+                    <span class="difficulty-badge difficulty-{{req_problem_id.difficulty|lower}}">
+                        {{req_problem_id.difficulty|title}}
+                    </span>
+                  </a>
+            </div>
+        </div>
     </div>
     <hr>
     <h2>Probelm Statement:</h2>
