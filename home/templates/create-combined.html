@@ -1,4 +1,5 @@
 {% load static %}
+{% if user.role == 'setter' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,7 @@
     </style>
 </head>
 <body>
+    
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-left">
@@ -72,6 +74,26 @@
                             <div class="error-text">{{ problem_form.statement.errors }}</div>
                         {% endif %}
                     </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{ problem_form.sip.id_for_label }}">
+                                <strong>Sample Input Format</strong> <span class="required">*</span>
+                            </label>
+                            {{ problem_form.sip }}
+                            {% if problem_form.sip.errors %}
+                                <div class="error-text">{{ problem_form.sip.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ problem_form.sop.id_for_label }}">
+                                <strong>Sample Output Format</strong><span class="required">*</span>
+                            </label>
+                            {{ problem_form.sop }}
+                            {% if problem_form.sop.errors %}
+                                <div class="error-text">{{ problem_form.sop.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Test Case Section -->
@@ -129,3 +151,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+{% else %}
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="refresh" content="0; url=/home/problems/">
+    <meta charset="UTF-8">
+    <title>Access Denied</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{% static 'home/addproblem-style.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;900&display=swap');
+    </style>
+</head>
+<body></body>
+</html>
+{% endif %} 

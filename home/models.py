@@ -29,6 +29,8 @@ class problems(models.Model):
 
     prblmname = models.CharField(max_length = 30)
     statement = models.CharField(max_length=3000)
+    sip = models.CharField(max_length=50)
+    sop = models.CharField(max_length=50)
     difficulty = models.CharField(max_length=10, choices=DIFF_CHOICES, default='Easy')
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     

@@ -34,10 +34,21 @@
     </nav>   
     <!-- PAGE -->
     <div class="problems-container">
-    <h1>{{req_problem_id.prblmname}}</h1>
+    <div class="topline">
+    <div class="l"><h1>{{req_problem_id.prblmname}}</h1></div>
+    <div class="r"><h4>Created by: {{req_problem_id.created_by}}</h4></div>
+    </div>
+    <hr>
     <h2>Probelm Statement:</h2>
     <p class="statement-container">
       {{req_problem_id.statement}}
+    </p>
+    <p class="statement-container">
+      Sample Input Format:
+      <br>
+      <code>{{req_problem_id.sip}}</code><br>
+      Sample Output Format:<br>
+      <code>{{req_problem_id.sop}}</code>
     </p>
     </div>
     

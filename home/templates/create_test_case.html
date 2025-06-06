@@ -1,4 +1,5 @@
 {% load static %}
+{% if user.role == 'setter' %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,3 +76,25 @@
     </div>
 </body>
 </html>
+{% else %}
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="refresh" content="0; url=/home/problems/">
+    <meta charset="UTF-8">
+    <title>Access Denied</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{% static 'home/addproblem-style.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;900&display=swap');
+    </style>
+</head>
+<body> 
+    <nav>
+    <div class="problem-container">
+            <h1>ACCESS DENIED</h1>
+        </div>
+    </nav>
+</body>
+</html>
+{% endif %} 

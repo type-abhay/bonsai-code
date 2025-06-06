@@ -7,10 +7,12 @@ from .models import test_cases, problems
 class ProblemsForm(forms.ModelForm):
     class Meta:
         model = problems
-        fields = ['prblmname', 'statement', 'difficulty']
+        fields = ['prblmname', 'statement','sip','sop', 'difficulty']
         widgets = {
             'prblmname': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter problem name'}),
             'statement': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Enter problem statement'}),
+            'sip': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter Sample Input Format'}),
+            'sop': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter Sample Output Format'}),
             'difficulty': forms.Select(attrs={'class': 'form-control'}),
         }
 

@@ -104,7 +104,30 @@ a {
     background: #e73b4e;
 }
 
+
 /* Main Container */
+.warn-container {
+    background: rgba(255, 255, 255, 0.1);
+    justify-content: center;
+    border-radius: 16px;
+    padding: 30px;
+    width: 98%;
+    max-width: 1200px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    color: white;
+    transition: 0.3s ease;
+    margin-top: 10px;
+}
+
+.warn-container h1 {
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 500;
+    font-size: 2.5rem;
+}
+
+
 .outer-container {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 16px;
