@@ -44,8 +44,30 @@ a {
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 3px;
 }
+/* .navbar {
+  padding: 20px 40px;
+  width: 98%;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 8px auto;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+} */
 
 .nav-title {
   color: white;
@@ -93,7 +115,7 @@ a {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     color: white;
     transition: 0.3s ease;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .outer-container h1 {
@@ -129,9 +151,14 @@ a {
     margin-bottom: 20px;
     font-weight: 500;
     font-size: 1.5rem;
-    color: #b2efd694;
-    border-bottom: 2px solid #b2efd694;
+    color: #40826d;
+    border-bottom: 2px solid #40826d;
     padding-bottom: 8px;
+}
+
+ .dotty {
+    color : #40826d;
+    font-weight: 900;
 }
 
 /* Form Layout */

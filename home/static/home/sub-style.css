@@ -8,6 +8,12 @@
   font-style: normal;
   }
 
+  
+ .dotty {
+    color : #40826d;
+    font-weight: 900;
+}
+
   body {
     min-height: 100vh;
     padding-top: 100px;
@@ -31,7 +37,7 @@
     border-radius: 16px;
     padding: 30px;
     position: relative;
-    margin-top: 100px;
+    margin-top: 10px;
 }
 
 .title {

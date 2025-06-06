@@ -15,12 +15,12 @@
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="nav-left">
-        <a href="/home/problems" class="nav-title">Problem Portal</a>
+        <a href="{% url 'all-problem-list' %}" class="nav-title">bonsai<span class="dotty">.</span>code</a>
         <a href="/home/compiler" class="nav-link">Compiler</a>
         <a href="/home/dashboard" class="nav-link">Dashboard</a>
       </div>
       <div class="nav-right">
-        <a href="/auth/logout"><button class="logout-btn">Logout</button></a>
+        <a href="/accounts/logout"><button class="logout-btn">Logout</button></a>
       </div>
     </nav>   
     <!-- PAGE -->

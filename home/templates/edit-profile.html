@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static 'home/editprofile_style.css' %}">
     <!-- FONT PART -->
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;900&display=swap');
     </style>
     <title>Profile</title>
 </head>
@@ -14,12 +14,12 @@
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="nav-left">
-        <a href="/home/problems" class="nav-title">Problem Portal</a>
+        <a href="{% url 'all-problem-list' %}" class="nav-title">bonsai<span class="dotty">.</span>code</a>
         <a href="/home/compiler" class="nav-link">Compiler</a>
         <a href="/home/dashboard" class="nav-link">Dashboard</a>
       </div>
       <div class="nav-right">
-        <a href="/auth/logout"><button class="logout-btn">Logout</button></a>
+        <a href="/accounts/logout"><button class="logout-btn">Logout</button></a>
       </div>
     </nav>  
     <!-- NAVBAR-->

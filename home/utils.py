@@ -8,27 +8,40 @@ def APICALL(language, code):
         
         #prompt shi
         prompt = f"""
-        You are an expert code reviewer. Please review the following {language} code for:
-        1. Syntax errors
-        2. Best practices
-        3. Suggestions for improvement
-        
-        Code to review:
+        You are an expert code reviewer with extensive experience in software development and best practices. 
+        Please conduct a thorough review of the following {language} code.
+
+        Review Focus Areas:
+        1. Syntax errors - Identify any grammatical or structural issues that would prevent compilation or execution
+        2. Best practices - Evaluate adherence to industry standards and conventional coding patterns for {language}
+        3. Suggestions for improvement** - Recommend enhancements for readability, performance, maintainability, and code quality
+
+        **Code to review:**
         ```
         {code}
         ```
-        Hint at explainations rather than explaining them encouraging learning instead of just soltuion.
-        But do specify which part you are referring to.
-        Do not include any thinking process or meta-commentary in your response.
+        Review Guidelines:
+        - Reference specific code sections by line numbers or code snippets when providing feedback
+        - Hint at explanations rather than providing complete solutions - guide the developer toward understanding the underlying principles
+        - Encourage learning by asking thought-provoking questions or suggesting research directions
+        - Be specific about which exact part of the code each comment addresses
+        - Focus on actionable feedback that the developer can implement
+
+        Response Format:
+        - Provide direct, focused feedback without meta-commentary or thinking processes
+        - Structure your review clearly with distinct sections for each type of issue found
+        - Use code references (e.g., "In line 15..." or "The function `calculateTotal()`...") to pinpoint exact locations
+
+        Please begin your review now.
         """
         
-        # Make API call to Together AI
+        # API CALL
         response = client.chat.completions.create(
             model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",  # model name
             messages=[
                 {
                     "role": "system",
-                    "content": "You are an experienced software developer. Provide direct, code reviews without showing your thinking process. Write in proper paragraphs and do not use markdown."
+                    "content": "You are an experienced software developer. Provide direct, code reviews without showing your thinking process. Write in proper paragraphs and do not use '**' for formatting."
                 },
                 {
                     "role": "user", 

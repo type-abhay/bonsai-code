@@ -1,0 +1,106 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Judge - Online Programming Platform</title>
+    <link rel="stylesheet" href="{% static 'home/home-style.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;900&display=swap');
+    </style>
+</head>
+<body>`
+    <div class="container">
+        <!--Navigation -->
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="{% url 'all-problem-list' %}" class="nav-title">bonsai<span class="dotty">.</span>code</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="https://github.com/type-abhay/lvl4project?tab=readme-ov-file#online-judge-platform" class="nav-link">About</a>
+            </div>
+        <div class="nav-right">
+        {% if user.is_authenticated %}
+        <!--logged in -->
+        <form method="post" action="/accounts/logout/" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="logout-btn">Logout <span class="username-on-hover">({{ user.username }}) </span></button>
+        </form>
+        {% else %}
+        <!-- not logged in -->
+        <a href="/accounts/login" class="logout-btn">Login</a>
+        {% endif %}
+        <!-- <a href="/auth/logout/"><button class="logout-btn">Logout</button></a> -->
+        </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="title-main">bonsai<span class="dotty">.</span>code</span>
+                        <span class="title-subtitle">Online Judge Platform</span>
+                    </h1>
+                    
+                    <p class="hero-description">
+                        Master your programming skills with our comprehensive online judge system. 
+                        Practice coding problems, compete with others, and track your progress.
+                        Also it's completly Open Source!
+                    </p>
+                    
+                    <div class="hero-actions">
+                        <a href="{% url 'all-problem-list' %}" class="btn btn-primary">
+                            Start Solving Problems
+                            <span class="btn-icon">→</span>
+                        </a>
+                        <a href="#features" class="btn btn-secondary">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Code Animation Background -->
+                <div class="code-animation">
+                    <div class="code-line">
+                        <span class="code-keyword">def</span> 
+                        <span class="code-function">solve_problem</span>():
+                    </div>
+                    <div class="code-line">
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> 
+                        <span class="code-string">"success"</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⌨️</div>
+                    <h3>Language</h3>
+                    <p>Code in the language of your chosing.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Multiple Difficulties</h3>
+                    <p>Problems ranging from beginner to advanced levels.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Review</h3>
+                    <p>Get detailed feedback on your syntax using AI with one click.</p>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="footer-content">
+                <span>&copy; 2025 bonsai.code. </span>
+                <a href="https://www.linkedin.com/in/singh-abhay175">hey!</a>
+                <span>Made with <a href="https://www.linkedin.com/in/singh-abhay175">🩸</a>, sweat & tears.</span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -15,7 +15,24 @@
     justify-content: center;
     align-items: center;
   }
+
+  a{
+    color:white;
+  }
+
+  .ques {
+    margin-bottom: 5px;
+  }
   
+
+.login-container h1 .dotty {
+    align-self: center;
+    color: #40826d !important;
+    -webkit-text-fill-color: #40826d !important;
+    font-weight: 900;
+    font-size:40px;
+}
+
   .login-container {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 16px;
@@ -44,15 +61,18 @@
   
   
   .login-container h1 {
-    text-align: center;
-    margin-bottom: 24px;
-    font-weight: 500;
+    text-align: left;
+    margin-left: 99px;
+    margin-bottom: 22px;
+    font-weight: 600;
   }
+
+  
 
   .login-container h3 {
     text-align: center;
     margin-bottom: 24px;
-    font-weight: 500;
+    font-weight: 375;
   }
   
   .form-group {

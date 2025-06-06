@@ -9,7 +9,7 @@
     <!-- v6 is also supported -->
     <!-- FONT PART -->
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;900&display=swap');
     </style>
     <title>Profile</title>
 </head>
@@ -17,13 +17,23 @@
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="nav-left">
-        <a href="/home/problems" class="nav-title">Problem Portal</a>
+        <a href="{% url 'all-problem-list' %}" class="nav-title">bonsai<span class="dotty">.</span>code</a>
         <a href="/home/compiler" class="nav-link">Compiler</a>
         <a href="/home/dashboard" class="nav-link">Dashboard</a>
       </div>
       <div class="nav-right">
-        <a href="/auth/logout"><button class="logout-btn">Logout</button></a>
-      </div>
+        {% if user.is_authenticated %}
+      <!-- User is logged in -->
+      <form method="post" action="/accounts/logout/" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="logout-btn">Logout <span class="username-on-hover">({{ user.username }}) </span></button>
+      </form>
+      {% else %}
+      <!-- User is not logged in -->
+      <a href="/accounts/login" class="logout-btn">Login</a>
+      {% endif %}
+        <!-- <a href="/auth/logout/"><button class="logout-btn">Logout</button></a> -->
+      </div>    
     </nav>  
     <!-- NAVBAR-->
 
@@ -61,8 +71,8 @@
                 <div class="detail-card bio-card">
                     <div class="detail-label">Bio</div>
                     <div class="detail-value">
-                        {% if user.bio %}
-                            {{ user.bio }}
+                        {% if user.profile.bio %}
+                            {{ user.profile.bio }}
                         {% else %}
                             <span class="empty-bio">No bio added yet</span>
                         {% endif %}

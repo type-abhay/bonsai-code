@@ -138,6 +138,12 @@ p {
       padding: 30px;
     }
   }
+
+   .dotty {
+    color : #40826d;
+    font-weight: 900;
+}
+
   .navbar {
     padding: 20px 40px;
     width: 98%;

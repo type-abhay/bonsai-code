@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
     <!-- FONT PART -->
    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;900&display=swap');
     </style>
     <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
     <title>Registration Form</title>
   </head>
   <body>
     <div class=" login-container">
-      <h1>Online Judge</h1>
+      <h1>bonsai<span class="dotty">.</span>code</h1>
       <h3>Register</h3>
       <!-- Registration form -->
       <form
@@ -58,7 +58,7 @@
         </div>
 
         <!-- Link to login page for users who already have an account -->
-        <p>Already have an account <a href="/auth/login/">Login</a></p>
+        <p>Already have an account <a href="/accounts/login/" class="ques">Login</a></p>
 
         <!-- Submit button -->
         <button type="submit" class="login-btn">Register</button>

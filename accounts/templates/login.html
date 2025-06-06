@@ -7,14 +7,14 @@
     <title>Login</title>
     <!-- FONT PART -->
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;900&display=swap');
     </style>
     <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
   </head>
 
   <body>
     <div class="login-container">
-      <h1>Online Judge</h1>
+      <h1>bonsai<span class="dotty">.</span>code</h1>
       <h3>Login</h3>
       <!-- Login form -->
       <form
@@ -59,7 +59,7 @@
         </div>
 
         <!-- Link to registration page -->
-        <p>Don't have an account <a href="/auth/register/">Register</a></p>
+        <p class="ques">Don't have an account <a href="/accounts/register/">Register</a></p>
 
         <!-- Submit button -->
         <button type="submit" class="login-btn">Login</button>

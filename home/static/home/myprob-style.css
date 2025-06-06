@@ -21,6 +21,12 @@ a {
     font-weight: 500;
 }
 
+
+ .dotty {
+    color : #40826d;
+    font-weight: 900;
+}
+
 .main-container {
     display: flex;
     flex-direction: column;

@@ -9,7 +9,7 @@
     <link rel="icon" href="favicon.png" />
     <link rel="stylesheet" href="{% static 'home/myprob-style.css' %}">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@444&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;900&display=swap');
     </style>
   <header> 
     
@@ -19,7 +19,7 @@
   <body>
     <nav class="navbar">
       <div class="nav-left">
-        <a href="/home/problems" class="nav-title">Problem Portal</a>
+        <a href="{% url 'all-problem-list' %}" class="nav-title">bonsai<span class="dotty">.</span>code</a>
         <a href="/home/compiler" class="nav-link">Compiler</a>
         <a href="/home/dashboard" class="nav-link">Dashboard</a>
         {% if user.role == 'setter' %}
@@ -27,7 +27,7 @@
         {% endif %}        
       </div>
       <div class="nav-right">
-        <a href="/auth/logout/"><button class="logout-btn">Logout</button></a>
+        <a href="/accounts/logout/"><button class="logout-btn">Logout</button></a>
       </div>
     </nav>    
 
@@ -65,8 +65,8 @@
                 <div class="detail-card bio-card">
                     <div class="detail-label">Bio</div>
                     <div class="detail-value">
-                        {% if user.bio %}
-                            {{ user.bio }}
+                        {% if user.profile.bio %}
+                            {{ user.profile.bio }}
                         {% else %}
                             <span class="empty-bio">No bio added yet</span>
                         {% endif %}

@@ -17,6 +17,12 @@
     padding-top: 100px;
     align-items: center;
   }
+
+  
+ .dotty {
+    color : #40826d;
+    font-weight: 900;
+}
   
   .problems-container {
     background: rgba(255, 255, 255, 0.1);
@@ -177,22 +183,42 @@
     color: #00c6ff;
   }
   
+  
   /* BUTTONS */
   .logout-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    background: #4d4d5b;
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .logout-btn:hover {
-    background: #e73b4e;
-  }
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #4d4d5b; 
+  color: white; 
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.logout-btn:hover {
+  background: #e73b4e;
+}
+
+a.logout-btn:hover {
+  background: #40826d; /* Green color for login hover */
+}
+
+.logout-btn .username-on-hover {
+  display: none; 
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.logout-btn:hover .username-on-hover {
+  display: inline;
+  opacity: 1;
+}
+
   .run-btn {
     padding: 10px 20px;
     border: none;
@@ -244,12 +270,13 @@
     color: white;
     font-weight: 600;
     font-size: 14px;
+    overflow: hidden;
     cursor: pointer;
     transition: background 0.3s ease;
-  }
-  
-  .AI-btn:hover {
+    position: relative; /* Added for spinner positioning */
+}
+
+.AI-btn:hover {
     /* background: #4d4d5b; */
     background:#008080;
-
-  }
+}

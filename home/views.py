@@ -28,6 +28,8 @@ import plotly.graph_objects as go
 
 # Create your views here.
 
+def home(request):
+    return render(request, 'home.html')
 
 @login_required
 def Profile(request):
@@ -49,14 +51,20 @@ def Profile(request):
 @login_required
 def dashboard(request):
     if request.user.role == 'setter':
+        user = request.user
         user_problems = problems.objects.filter(created_by=request.user)
-        return render(request, 'my-prob.html', {'problems': user_problems})
+        profile_form = UpdateProfileForm(instance=request.user.profile)
+        context = {
+            'problems': user_problems,
+            'user': user,
+        }
+        return render(request, 'my-prob.html', context)
 
     else:
         user = request.user
         plot_div = generate_github_style_heatmap(user)
             
-        
+        profile_form = UpdateProfileForm(instance=request.user.profile)
         total_submissions = UserSubmission.objects.filter(user=user).count()
         context = {
             'plot_div': plot_div,
@@ -181,7 +189,7 @@ def generate_github_style_heatmap(user, year=None):
 
 # ---HEATMAPS END---
 
-@login_required
+
 def load_prblms(request):
     all_prlls = problems.objects.all()
 
@@ -246,11 +254,15 @@ def prblm_page(request,req_problem_id):
                     output = submit_code(submission.language, submission.code, input_list[i],output_list[i])
                     if output == 0:
                         res = "REJECTED"
+                        flag = 1
                         break
                     elif output == 1:
                         res = "ACCEPTED"
-                        UserSubmission.objects.create(user=request.user)
+                        flag = 0
+                        
                 
+                if flag==0:
+                    UserSubmission.objects.create(user=request.user)
                 submission.output_data = res
                 submission.save()
                 return render(request, "sub-result.html", {"submission": submission})
@@ -520,7 +532,7 @@ def create_test_case(request):
             messages.success(request, 'Test case created successfully!')
             return redirect('create_test_case')
     else:
-        form = TestCasesForm()
+        form = TestCasesFormWID()
     
     return render(request, 'create_test_case.html', {'form': form})
 

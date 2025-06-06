@@ -2,7 +2,6 @@ from django.shortcuts import render,redirect
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 User = get_user_model()
-
 from django.contrib import messages
 from django.template import loader
 from django.http import HttpResponse
@@ -19,7 +18,7 @@ def register_user(request):
 
         if user.exists():
             messages.info(request,'User with this username already exists')
-            return redirect("/auth/register/")
+            return redirect("/accounts/register/")
         
         user = User.objects.create_user(username=username)
 
@@ -28,7 +27,7 @@ def register_user(request):
         user.save()
         
         messages.info(request,'User created successfully')
-        return redirect('/auth/register/')
+        return redirect('/accounts/register/')
     
     template = loader.get_template('register.html')
     context = {}
@@ -44,13 +43,13 @@ def login_user(request):
 
         if not User.objects.filter(username=username).exists():
             messages.info(request,'User with this username does not exist')
-            return redirect('/auth/login/')
+            return redirect('/accounts/login/')
         
         user = authenticate(username=username, password=password)
 
         if user is None:
             messages.info(request,'invalid password')
-            return redirect('/auth/login')
+            return redirect('/accounts/login')
         
 
         login(request,user)
@@ -65,4 +64,4 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.info(request,'logout successful')
-    return redirect('/auth/login/')
+    return redirect('/accounts/login/')
