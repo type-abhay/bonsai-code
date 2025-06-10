@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-+5+)y2rly^x)uwh7xt)rq(!9te3t(@!&%isocc_aeto)j8_5et
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['51.20.56.28']
 
 
 # Application definition
@@ -132,5 +132,3 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 load_dotenv()
 TOGETHER_API_KEY = os.getenv('TOGETHER_API_KEY')
-
-

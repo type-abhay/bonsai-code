@@ -18,6 +18,8 @@ from .utils import APICALL
 import re
 from django.contrib import messages
 from .forms import ProblemsForm, TestCasesForm,TestCasesFormWID
+#time out
+from func_timeout import func_set_timeout, FunctionTimedOut, func_timeout
 #heatmap
 from django.db.models import Count
 from django.db.models.functions import TruncDate
@@ -27,6 +29,8 @@ import numpy as np
 import plotly.graph_objects as go
 
 # Create your views here.
+# plotly, func_timeout, pandas, numpy
+
 
 def home(request):
     return render(request, 'home.html')
@@ -227,10 +231,18 @@ def prblm_page(request,req_problem_id):
                 submission = form.save()
                 print(submission.language)
                 print(submission.code)                
-                output = run_code(submission.language, submission.code, submission.input_data)
-                submission.output_data = output
-                submission.save()
-                return render(request, "result.html", {"submission": submission})
+                try:
+                    # output = run_code(submission.language, submission.code, submission.input_data)
+                    output = func_timeout(10, run_code, args=(submission.language, submission.code, submission.input_data))
+                    submission.output_data = output
+                    submission.save()
+                    return render(request, "result.html", {"submission": submission})
+
+                except FunctionTimedOut:
+                    #Timeout error
+                    submission.output_data = "Time Limit Exceeded, check for infinte loops/recursion."
+                    submission.save()
+                    return render(request, "result.html", {"submission": submission})
         
         elif 'SUBMIT' in request.POST:
             form = CodeSubmissionForm(request.POST)
@@ -249,17 +261,26 @@ def prblm_page(request,req_problem_id):
                 print(input_list)
                 print(output_list)
                 n=len(input_list)
+                flag = 1
                 for i in range(n):
-                    output = submit_code(submission.language, submission.code, input_list[i],output_list[i])
-                    if output == 0:
-                        res = "REJECTED"
+                    try:
+                        # output = submit_code(submission.language, submission.code, input_list[i],output_list[i])
+                        output = func_timeout(10, submit_code, args=(submission.language, submission.code, input_list[i],output_list[i]))
+                        if output == 0:
+                            res = "REJECTED"
+                            flag = 1
+                            break
+                        elif output == 1:
+                            res = "ACCEPTED"
+                            flag = 0
+                    
+                    except FunctionTimedOut:
                         flag = 1
-                        break
-                    elif output == 1:
-                        res = "ACCEPTED"
-                        flag = 0
-                        
-                
+                        #Timeout error
+                        submission.output_data = "Time Limit Exceeded, check for infinte loops/recursion."
+                        submission.save()
+                        return render(request, "sub-result.html", {"submission": submission})
+
                 if flag==0:
                     UserSubmission.objects.create(user=request.user)
                 submission.output_data = res
@@ -270,14 +291,15 @@ def prblm_page(request,req_problem_id):
             form = CodeSubmissionForm(request.POST)
             if form.is_valid():
                 submission = form.save()
+                problem = problems.objects.get(id=req_problem_id)
                 print(submission.language)
                 print(submission.code)                
-                print("ABOUT TO CALL THIS AI SHIIIIIIIII")
+                print("debug info: ABOUT TO CALL THIS AI SHIIIIIIIII")
                 # Call Together AI API for code review
-                output = APICALL(submission.language, submission.code)                
+                output = APICALL(submission.language, submission.code,problem.prblmname)                
                 submission.output_data = output
                 submission.save()
-                print("AI SHIIIIIIIII CALL SUCCESS")
+                print("debug info: AI SHIIIIIIIII CALL SUCCESS")
                 return render(request, "airev.html", {"submission": submission})
          
 
@@ -297,13 +319,25 @@ def only_comp(request):
     if request.method == "POST":
         form = CodeSubmissionForm(request.POST)
         if form.is_valid():
-            submission = form.save()
+            submission = form.save()           
             print(submission.language)
             print(submission.code)                
-            output = run_code(submission.language, submission.code, submission.input_data)
-            submission.output_data = output
-            submission.save()
-            return render(request, "result.html", {"submission": submission})
+            try:
+                # output = run_code(submission.language, submission.code, submission.input_data)
+                output = func_timeout(10, run_code, args=(submission.language, submission.code, submission.input_data))
+                submission.output_data = output
+                if not submission.input_data:
+                    submission.input_data = "N/A"
+                submission.save()
+                return render(request, "result.html", {"submission": submission})
+
+            except FunctionTimedOut:
+                #Timeout error
+                submission.output_data = "Time Limit Exceeded, check for infinte loops/recursion."
+                if not submission.input_data:
+                    submission.input_data = "N/A"
+                submission.save()
+                return render(request, "result.html", {"submission": submission})
 
     else:
         form = CodeSubmissionForm()
@@ -401,6 +435,7 @@ def run_code(language, code, input_data):
         output_data = output_file.read()
 
     return output_data
+    pass
 
 
 
@@ -505,7 +540,7 @@ def submit_code(language, code, input_data,test_comp):
     
     
 # Problem Setter Part 
-#First two functions don't have a frontend cause I didn't  feel the need, maybe I'd make one for testcases
+#First function don't have a frontend cause I didn't feel the need, maybe I'd make one for testcases(done)
 
 def create_problem(request):
     if request.method == 'POST':

@@ -2,7 +2,7 @@ import os
 from together import Together
 from django.conf import settings
 
-def APICALL(language, code):
+def APICALL(language, code, name):
     try:
         client = Together(api_key=settings.TOGETHER_API_KEY)
         
@@ -10,25 +10,25 @@ def APICALL(language, code):
         prompt = f"""
         You are an expert code reviewer with extensive experience in software development and best practices. 
         Please conduct a thorough review of the following {language} code.
+        The code is meant to solve the following problem named:{name}.
 
         Review Focus Areas:
         1. Syntax errors - Identify any grammatical or structural issues that would prevent compilation or execution
         2. Best practices - Evaluate adherence to industry standards and conventional coding patterns for {language}
-        3. Suggestions for improvement** - Recommend enhancements for readability, performance, maintainability, and code quality
+        3. Suggestions for improvement.
 
         **Code to review:**
         ```
         {code}
         ```
         Review Guidelines:
-        - Reference specific code sections by line numbers or code snippets when providing feedback
         - Hint at explanations rather than providing complete solutions - guide the developer toward understanding the underlying principles
         - Encourage learning by asking thought-provoking questions or suggesting research directions
         - Be specific about which exact part of the code each comment addresses
         - Focus on actionable feedback that the developer can implement
 
         Response Format:
-        - Provide direct, focused feedback without meta-commentary or thinking processes
+        - YOU MUST NOT USE '*' for formatting, this is a very strict requirement.
         - Structure your review clearly with distinct sections for each type of issue found
         - Use code references (e.g., "In line 15..." or "The function `calculateTotal()`...") to pinpoint exact locations
 
