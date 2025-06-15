@@ -26,8 +26,8 @@ def register_user(request):
 
         user.save()
         
-        messages.info(request,'User created successfully')
-        return redirect('/accounts/register/')
+        messages.info(request,'User created successfully, Please Login Below!')
+        return redirect('/accounts/login/')
     
     template = loader.get_template('register.html')
     context = {}

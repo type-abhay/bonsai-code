@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class=" login-container">
-      <h1>bonsai<span class="dotty">.</span>code</h1>
+      <a href="{% url 'home' %}"><h1>bonsai<span class="dotty">.</span>code</h1></a>
       <h3>Register</h3>
       <!-- Registration form -->
       <form
@@ -59,7 +59,7 @@
         </div>
 
         <!-- Link to login page for users who already have an account -->
-        <p>Already have an account <a href="/accounts/login/" class="ques">Login</a></p>
+        <p class="ques">Already have an account <a href="/accounts/login/">Login</a></p>
 
         <!-- Submit button -->
         <button type="submit" class="login-btn">Register</button>

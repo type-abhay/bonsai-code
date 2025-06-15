@@ -2,13 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <meta charset="UTF-8" />
-    <title>Probelm Details Page</title>
+    <title>{{req_problem_id.prblmname}}</title>
     <link rel="stylesheet" href="{% static 'home/prblm-detail-style.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'home//favicon.ico' %}">
     <!-- FONT PART -->
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
     </style>
   </head>
   <body>
@@ -33,6 +34,7 @@
         <!-- <a href="/auth/logout/"><button class="logout-btn">Logout</button></a> -->
       </div>
     </nav>   
+    
     <!-- PAGE -->
     <div class="problems-container">
     <div class="topline">
@@ -50,7 +52,7 @@
         </div>
     </div>
     <hr>
-    <h2>Probelm Statement:</h2>
+    <h2>Problem Statement:</h2>
     <p class="statement-container">
       {{req_problem_id.statement}}
     </p>
@@ -63,27 +65,93 @@
     </p>
     </div>
     
+    <!-- COMPILER SIDE -->
     <div class="Compiler">
       <form method="post">
-      {% csrf_token %}
-      <p>Language:</p>{{ passform.language }}
-      <div class="code-container">
-        {{ passform.code }}
-      </div>
-      <div class="input-container">
-        <p>Input:</p>
-        {{ passform.input_data }}
-      </div>
-        <button type="submit" name="RUN" class="run-btn">
-          Run Code
+        {% csrf_token %}
+        <label for="{{ passform.language.id_for_label }}" style="font-weight:bold; margin-right:8px;">Language:</label>
+        <div class="select-inline-wrapper">{{ passform.language }}</div>
+        <div class="code-container">
+          {{ passform.code }}
+        </div>
+          <div class="input-container">
+          <p>Input:</p>
+          {{ passform.input_data }}
+          </div>
+
+          <div>
+          <button type="submit" name="RUN" class="run-btn" id="run-btn">
+          <span class="btn-text">Run Code</span>
+          <span class="btn-spinner" style="display:none;"></span>
+          </button>
+
+          <button type="submit" name="SUBMIT" class="submit-btn" id="submit-btn">
+            <span class="btn-text">Submit</span>
+            <span class="btn-spinner" style="display:none;"></span>
+          </button>
+
+          <button type="submit" name="AIREV" class="AI-btn" id="AI-btn">
+            <span class="btn-text">AI Review</span>
+            <span class="btn-spinner" style="display:none;"></span>
         </button>
-        <button type="submit" name="SUBMIT" class="submit-btn">
-          Submit
-        </button>
-        <button type="submit" name="AIREV" class="AI-btn">
-          AI Review
-        </button>
+        </div>
       </form>
     </div>  
-  </body>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.Compiler form');
+    const buttons = [
+      document.getElementById('run-btn'),
+      document.getElementById('submit-btn'),
+      document.getElementById('AI-btn')
+    ];
+
+    let clickedBtn = null;
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        clickedBtn = btn;
+        setTimeout(function() {
+          if (clickedBtn) {
+            clickedBtn.disabled = true;
+            clickedBtn.querySelector('.btn-text').style.display = 'none';
+            clickedBtn.querySelector('.btn-spinner').style.display = 'inline-block';
+          }
+        }, 10);
+      });
+    });
+
+    form.addEventListener('invalid', function(e) {
+      if (clickedBtn) {
+        clickedBtn.disabled = false;
+        clickedBtn.querySelector('.btn-text').style.display = 'inline-block';
+        clickedBtn.querySelector('.btn-spinner').style.display = 'none';
+        clickedBtn = null;
+      }
+    }, true);
+    form.addEventListener('submit', function() {
+  });
+});
+
+  </script>
+
+  
+
+<!-- CodeMirror CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/codemirror.min.css">
+<link rel="stylesheet" href="{% static 'home/material-palenight.css' %}">
+
+
+<!-- CodeMirror JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/mode/clike/clike.min.js"></script>
+<!-- Add other modes as needed -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/addon/display/placeholder.min.js"></script>
+
+<!-- Your initialization script -->
+<script src="{% static 'home/codemirror-init.js' %}"></script>
+
+</body>
 </html>

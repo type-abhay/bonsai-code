@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
 from django.template import loader
+from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -16,6 +15,7 @@ import filecmp
 from pathlib import Path
 from .utils import APICALL
 import re
+import markdown
 from django.contrib import messages
 from .forms import ProblemsForm, TestCasesForm,TestCasesFormWID
 #time out
@@ -27,9 +27,21 @@ import pandas as pd
 import datetime
 import numpy as np
 import plotly.graph_objects as go
+# password
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 # plotly, func_timeout, pandas, numpy
+
+
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'change-password.html'
+    success_message = "Successfully Changed Your Password"
+    success_url = reverse_lazy('password_change')
+
+
 
 
 def home(request):
@@ -136,7 +148,7 @@ def generate_github_style_heatmap(user, year=None):
     
     #coloring shi
     colorscale = [
-        [0, '#ebedf0'],      # No
+        [0, '#B9B9B9'],      # No
         [0.2, '#c6e48b'],    # Low  
         [0.4, '#7bc96f'],    # Medium-low
         [0.6, '#239a3b'],    # Medium
@@ -144,6 +156,10 @@ def generate_github_style_heatmap(user, year=None):
         [1, '#0d4429']       # Very high
     ]
     
+    zmax_value = matrix.max()
+    if zmax_value == 0:
+        zmax_value = 1
+
     #creating heatmap shi
     fig = go.Figure(data=go.Heatmap(
         z=matrix,
@@ -152,16 +168,19 @@ def generate_github_style_heatmap(user, year=None):
         showscale=False,
         hoverongaps=False,
         hovertemplate='<b>%{customdata}</b><br>Submissions: %{z}<extra></extra>',
-        xgap=2,
-        ygap=2
+        xgap=6,
+        ygap=6,
+        zmin=0,
+        zmax=zmax_value
     ))
     
     #settings
     fig.update_layout(
         title={
             'text': f'{year} Submission Activity',
-            'x': 0,
-            'font': {'size': 16, 'color': '#24292e'}
+            'x': 0.5,
+            'y' : 0.95,
+            'font' : dict(family='Space Grotesk, sans-serif', size=20, color='white'),
         },
         xaxis={
             'title': '',
@@ -178,11 +197,11 @@ def generate_github_style_heatmap(user, year=None):
             'zeroline': False,
             'autorange': 'reversed'
         },
-        plot_bgcolor='white',
-        paper_bgcolor='white',
-        height=200,
-        margin=dict(l=50, r=20, t=50, b=20),
-        font=dict(size=12, color='#586069')
+        plot_bgcolor='rgba(255, 255, 255, 0)',
+        paper_bgcolor='rgba(255, 255, 255, 0.2)',
+        height=240,
+        margin=dict(l=0, r=20, t=40, b=20),
+        font=dict(size=12, color='white')
     )
     
     return fig.to_html(
@@ -193,6 +212,7 @@ def generate_github_style_heatmap(user, year=None):
 
 # ---HEATMAPS END---
 
+# ---PROBLEMS TYPE SHI---
 
 def load_prblms(request):
     all_prlls = problems.objects.all()
@@ -223,27 +243,49 @@ def diff_probs(request, difficulty):
 
 
 @login_required
+def search_results(request):
+    query = request.GET.get('q')
+    if query:
+        results = problems.objects.filter(
+            Q(prblmname__icontains=query) | Q(difficulty__icontains=query)
+        )
+    else:
+        results = problems.objects.none()
+    return render(request, 'search-result.html', {'results': results})
+
+
+@login_required
 def prblm_page(request,req_problem_id):
     if request.method == "POST":
         if 'RUN' in request.POST:
             form = CodeSubmissionForm(request.POST)
             if form.is_valid():
-                submission = form.save()
-                print(submission.language)
-                print(submission.code)                
-                try:
-                    # output = run_code(submission.language, submission.code, submission.input_data)
-                    output = func_timeout(10, run_code, args=(submission.language, submission.code, submission.input_data))
-                    submission.output_data = output
-                    submission.save()
-                    return render(request, "result.html", {"submission": submission})
+                if not form.cleaned_data['code']:
+                    form.add_error('code', 'This field is required.')
+                
+                else:                    
+                    submission = form.save()
+                    print(submission.language)
+                    print(submission.code)                
+                    try:
+                        # output = run_code(submission.language, submission.code, submission.input_data)
+                        output = func_timeout(10, run_code, args=(submission.language, submission.code, submission.input_data))
+                        submission.output_data = output
+                        if not submission.input_data:
+                            submission.input_data = "N/A"
+                        submission.save()
+                        return render(request, "result.html", {"submission": submission})
 
-                except FunctionTimedOut:
-                    #Timeout error
-                    submission.output_data = "Time Limit Exceeded, check for infinte loops/recursion."
-                    submission.save()
-                    return render(request, "result.html", {"submission": submission})
-        
+                    except FunctionTimedOut:
+                        #Timeout error
+                        submission.output_data = "Time Limit Exceeded, check for infinte loops/recursion."
+                        if not submission.input_data:
+                            submission.input_data = "N/A"
+                        submission.save()
+                        return render(request, "result.html", {"submission": submission})
+            else:
+                form = CodeSubmissionForm()  # If 'RUN' not in POST, show empty form
+
         elif 'SUBMIT' in request.POST:
             form = CodeSubmissionForm(request.POST)
             if form.is_valid():
@@ -267,7 +309,7 @@ def prblm_page(request,req_problem_id):
                         # output = submit_code(submission.language, submission.code, input_list[i],output_list[i])
                         output = func_timeout(10, submit_code, args=(submission.language, submission.code, input_list[i],output_list[i]))
                         if output == 0:
-                            res = "REJECTED"
+                            res = (f"REJECTED! \nFailed Test Case: " + str(i+1))
                             flag = 1
                             break
                         elif output == 1:
@@ -284,6 +326,8 @@ def prblm_page(request,req_problem_id):
                 if flag==0:
                     UserSubmission.objects.create(user=request.user)
                 submission.output_data = res
+                if not submission.input_data:
+                    submission.input_data = "N/A"
                 submission.save()
                 return render(request, "sub-result.html", {"submission": submission})
 
@@ -297,58 +341,72 @@ def prblm_page(request,req_problem_id):
                 print("debug info: ABOUT TO CALL THIS AI SHIIIIIIIII")
                 # Call Together AI API for code review
                 output = APICALL(submission.language, submission.code,problem.prblmname)                
-                submission.output_data = output
+                submission.output_data = markdown.markdown(output,extensions=['fenced_code', 'codehilite'])
                 submission.save()
                 print("debug info: AI SHIIIIIIIII CALL SUCCESS")
                 return render(request, "airev.html", {"submission": submission})
          
+        
+        problem_obj = problems.objects.get(id=req_problem_id)
+        context = {
+            'req_problem_id': problem_obj,
+            'passform': form,
+        }
+        return render(request, "prblm_detail.html", context)
 
     else:
         form = CodeSubmissionForm()
-        problem_id = problems.objects.get(id=req_problem_id)
+        problem_obj = problems.objects.get(id=req_problem_id)
         context = {
-        'req_problem_id':problem_id,
-        'passform': form,
+            'req_problem_id': problem_obj,
+            'passform': form,
         }
-        
-    template = loader.get_template('prblm_detail.html')
-    return HttpResponse(template.render(context,request))   
+        return render(request, "prblm_detail.html", context)
+
+# IDE
 
 
 def only_comp(request):
     if request.method == "POST":
         form = CodeSubmissionForm(request.POST)
         if form.is_valid():
-            submission = form.save()           
-            print(submission.language)
-            print(submission.code)                
-            try:
-                # output = run_code(submission.language, submission.code, submission.input_data)
-                output = func_timeout(10, run_code, args=(submission.language, submission.code, submission.input_data))
-                submission.output_data = output
-                if not submission.input_data:
-                    submission.input_data = "N/A"
-                submission.save()
-                return render(request, "result.html", {"submission": submission})
+            if not form.cleaned_data['code']:
+                    form.add_error('code', 'This field is required.')
+                    context = {'passform': form}
+                    template = loader.get_template('only-comp.html')
+                    return HttpResponse(template.render(context, request))
+            else:
 
-            except FunctionTimedOut:
-                #Timeout error
-                submission.output_data = "Time Limit Exceeded, check for infinte loops/recursion."
-                if not submission.input_data:
-                    submission.input_data = "N/A"
-                submission.save()
-                return render(request, "result.html", {"submission": submission})
+                submission = form.save()           
+                print(submission.language)
+                print(submission.code)                
+                try:
+                    # output = run_code(submission.language, submission.code, submission.input_data)
+                    output = func_timeout(10, run_code, args=(submission.language, submission.code, submission.input_data))
+                    submission.output_data = output
+                    if not submission.input_data:
+                        submission.input_data = "N/A"
+                    submission.save()
+                    return render(request, "result.html", {"submission": submission})
+
+                except FunctionTimedOut:
+                    #Timeout error
+                    submission.output_data = "Time Limit Exceeded, check for infinte loops/recursion."
+                    if not submission.input_data:
+                        submission.input_data = "N/A"
+                    submission.save()
+                    return render(request, "result.html", {"submission": submission})
+        else:
+            form = CodeSubmissionForm()
+            context = {'passform': form}
+            template = loader.get_template('only-comp.html')
+            return HttpResponse(template.render(context,request)) 
 
     else:
         form = CodeSubmissionForm()
-        context = {
-        'passform': form,
-        }
-        
-    template = loader.get_template('only-comp.html')
-    return HttpResponse(template.render(context,request))   
-
-
+        context = {'passform': form}
+        template = loader.get_template('only-comp.html')
+        return HttpResponse(template.render(context,request))
 
 @login_required
 def prblm_detail(request,req_problem_id):

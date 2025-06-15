@@ -4,13 +4,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Result Page</title>
+    <title>Execution Result</title>
     <link rel="stylesheet" href="{% static 'home/result-style.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'home//favicon.ico' %}">
     <!-- FONT PART -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');</style>
   </head>
   <body>
     <!-- NAVBAR -->
@@ -21,7 +19,10 @@
         <a href="/home/dashboard" class="nav-link">Dashboard</a>
       </div>
       <div class="nav-right">
-        <a href="/accounts/logout"><button class="logout-btn">Logout</button></a>
+        <form method="post" action="/accounts/logout/" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="logout-btn">Logout <span class="username-on-hover">({{ user.username }}) </span></button>
+      </form>
       </div>
     </nav>   
     <!-- PAGE -->
@@ -51,7 +52,7 @@
           </div>        
         </div>
         
-      <a href=""> <button class="run-btn">Run Again</button> </a>        
+      <button  onclick="history.back()" class="run-btn">Run Again</button>       
     </div>
   </body>
 </html>

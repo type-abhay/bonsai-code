@@ -4,13 +4,14 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="{% static 'home//favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'home/problist_style.css' %}">
     <title>Problems Page</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="" />
     <link rel="icon" href="favicon.png" />
-    <link rel="stylesheet" href="{% static 'home/problist_style.css' %}">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;900&display=swap');
+    /* @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;900&display=swap'); */
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
     </style>
   </head>
   <body>
@@ -41,6 +42,18 @@
 
     <div class="outer-container">
       <h1>List Of Problems</h1>
+      <div class="search-bar-container">
+        <form action="{% url 'search_results' %}" method="get" class="search-form">
+          <input name="q" type="text" class="search-input" placeholder="Search by name or difficulty...">
+           <button type="submit" class="search-btn" aria-label="Search">
+            <!-- Inline SVG for magnifying glass -->
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </form>
+      </div>
       <div class="problem-container">
         <div class="table-header">
           <div class="header-item name-column">NAME</div>

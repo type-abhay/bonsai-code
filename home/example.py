@@ -1,3 +1,4 @@
+# the following code is only to increase the % of python so it doesn't say it's a CSS project :(
 print("% ka JUGAD")
 print("% ka JUGAD")
 print("% ka JUGAD")

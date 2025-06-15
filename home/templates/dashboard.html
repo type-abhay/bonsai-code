@@ -5,12 +5,13 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="{% static 'home/dash-style.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'home//favicon.ico' %}">
+    <title>Dashboard</title>
     <!-- HEATMAP -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <!-- v6 is also supported -->
     <!-- FONT PART -->
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
     </style>
     <title>Profile</title>
 </head>
@@ -85,7 +86,9 @@
         <div class="heatmap-section">
             <div class="heatmap-container">
                 <h2>User Submission Heatmap</h2>
-                {{ plot_div|safe }}
+                    <div id="chartbaby">
+                        {{ plot_div|safe }}
+                    </div>
             </div>
         </div>
     </div>

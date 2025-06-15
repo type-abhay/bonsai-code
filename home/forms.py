@@ -47,11 +47,20 @@ LANGUAGE_CHOICES = [
 
 class CodeSubmissionForm(forms.ModelForm):
     language = forms.ChoiceField(choices=LANGUAGE_CHOICES)
-    
-    def __init__(self, *args, **kwargs):
-        super(CodeSubmissionForm, self).__init__(*args, **kwargs)
-        self.fields['code'].widget.attrs['placeholder'] = 'Write Code here'
+    code = forms.CharField(
+        required=False,  # Disable browser-side required validation
+        widget=forms.Textarea(attrs={
+            'placeholder': 'Write Code here',
+            'class': 'code-editor',  # For CodeMirror targeting
+            'rows': 20,
+            'cols': 80,
+        })
+    )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['language'].widget.attrs.update({'class': 'custom-select'})
+    
     class Meta:
         model = CodeSubmission
         fields = ["language", "code", "input_data"]

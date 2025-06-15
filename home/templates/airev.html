@@ -6,11 +6,11 @@
     <meta charset="UTF-8" />
     <title>AI Review</title>
     <link rel="stylesheet" href="{% static 'home/airev-style.css' %}">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="{% static 'home/favicon.ico' %}">
     <!-- FONT PART -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');</style>
   </head>
   <body>
     <!-- NAVBAR -->
@@ -28,14 +28,13 @@
      
     <div class="execution-container">
         <h1 class="title">AI Review</h1>
-        <a href=""> <button class="run-btn">Back to Problem</button> </a>         
+        <button  onclick="history.back()" class="run-btn">Back to Problem</button>           
           <div class="content-box">
               <div class="box-content">
-                <p><strong>Output:</strong> <pre>{{ submission.output_data }}</pre></p>
+                <div class="markdown-output">{{ submission.output_data|safe }}</div>
               </div>
           </div>        
-        </div> 
-      </div>
+      </div> 
   </body>
 </html>
 
