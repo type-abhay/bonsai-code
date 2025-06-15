@@ -10,3 +10,4 @@ codes
 Dockerfile
 .dockerignore
 keys
+staticfiles

@@ -17,7 +17,7 @@ def register_user(request):
         user = User.objects.filter(username=username)
 
         if user.exists():
-            messages.info(request,'User with this username already exists')
+            messages.error(request,'User with this username already exists')
             return redirect("/accounts/register/")
         
         user = User.objects.create_user(username=username)
@@ -26,7 +26,7 @@ def register_user(request):
 
         user.save()
         
-        messages.info(request,'User created successfully, Please Login Below!')
+        messages.success(request, 'User created successfully, Please Login Below!')
         return redirect('/accounts/login/')
     
     template = loader.get_template('register.html')
@@ -42,18 +42,17 @@ def login_user(request):
         password = request.POST.get('password')
 
         if not User.objects.filter(username=username).exists():
-            messages.info(request,'User with this username does not exist')
+            messages.error(request,'User with this username does not exist')
             return redirect('/accounts/login/')
         
         user = authenticate(username=username, password=password)
 
         if user is None:
-            messages.info(request,'invalid password')
+            messages.error(request,'invalid password')
             return redirect('/accounts/login')
         
 
         login(request,user)
-        messages.info(request,'login successful')
 
         return redirect('/home/problems/')
     
@@ -63,5 +62,5 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    messages.info(request,'logout successful')
+    messages.success(request,'logout successful')
     return redirect('/accounts/login/')
