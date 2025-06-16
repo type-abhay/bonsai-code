@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.db.models import Q
 from django.http import HttpResponse
@@ -664,3 +665,36 @@ def create_problem_with_test_cases(request):
         'problem_form': problem_form,
         'test_case_form': test_case_form
     })
+
+
+def edit_problem(request, pk):
+    problem = get_object_or_404(problems, pk=pk)
+
+    # Get the first related test case (or None if not found)
+    test_case_instance = test_cases.objects.filter(prblm_id=problem).first()
+
+    if request.method == 'POST':
+        form = ProblemsForm(request.POST, instance=problem)
+        test_form = TestCasesForm(request.POST, instance=test_case_instance)
+        if form.is_valid() and test_form.is_valid():
+            form.save()
+            test_case = test_form.save(commit=False)
+            test_case.prblm_id = problem  # Ensure FK is set
+            test_case.save()
+            messages.success(request, 'Problem and test case updated successfully!')
+            return redirect('edit-problem', pk=problem.pk)
+    else:
+        form = ProblemsForm(instance=problem)
+        test_form = TestCasesForm(instance=test_case_instance)
+
+    return render(request, 'edit-problem.html', {
+        'problem_form': form,
+        'test_case_form': test_form,
+    })
+
+
+def delete_problem(request, pk):
+    problem = get_object_or_404(problems, pk=pk)
+    problem.delete()  # This will also delete all related TestCase objects if on_delete=CASCADE
+    messages.success(request, "Problem and its test cases deleted successfully!")
+    return redirect('dashydashy')

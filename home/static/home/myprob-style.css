@@ -233,6 +233,81 @@ a {
     font-size: 14px;
 }
 
+
+/* Messages styling */
+.messages {
+    margin-bottom: 16px;
+}
+.alert-success {
+    background: rgba(0, 198, 255, 0.12);
+    color: #00c6ff;
+    border-left: 4px solid #00c6ff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.problem-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Group icons together and align center */
+.icon-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 4px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.icon-btn:hover {
+    background: rgba(0, 198, 255, 0.12);
+}
+
+/* Ensure all SVG icons are the same size and aligned */
+.icon-btn svg {
+    width: 22.5px !important;
+    height: 22.5px !important;
+    min-width: 22.5px;
+    min-height: 22.5px;
+    max-width: 22.5px;
+    max-height: 22.5px;
+    box-sizing: content-box;
+    display: block;
+}
+
+/* Specifically color the delete SVG icon */
+.delete-svg {
+    stroke: red;
+}
+
+
+/* Optional: adjust spacing for h3 to avoid icon overlap */
+.problem-header h3 {
+    margin: 0;
+    flex: 1 1 auto;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+
+
 .outer-container {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 16px;

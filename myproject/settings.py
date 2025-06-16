@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-+5+)y2rly^x)uwh7xt)rq(!9te3t(@!&%isocc_aeto)j8_5et"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['51.20.56.28','localhost', '127.0.0.1','.bonsaicode.software']
+ALLOWED_HOSTS = ['51.21.36.60','localhost', '127.0.0.1','.bonsaicode.software']
 
 
 # Application definition
@@ -106,6 +106,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # LOGIN_URL = 'auth/login'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://www.bonsaicode.software',
+    'https://bonsaicode.software',
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
