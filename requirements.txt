@@ -1,0 +1,8 @@
+Django==5.2.3
+func_timeout==4.3.5
+Markdown==3.8
+numpy==2.3.0
+pandas==2.3.0
+plotly==6.1.2
+python-dotenv==1.1.0
+together==1.5.14
