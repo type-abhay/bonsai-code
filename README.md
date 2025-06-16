@@ -1,5 +1,4 @@
-# Online Judge Platform
-A simple straightforward and uncluttered online judge platform, with intuitive AI reviewer, and a compiler page if god forbid you can't access your IDE :)
+# Project README
 
 ## About the Project
 
@@ -58,10 +57,10 @@ Follow these steps to build and run the project locally:
 - Create and activate a virtual environment.
 - I used CMD as my terminal, the command below is to activate the Virtual ENV works for CMD in windows. Figure out on your own if you use PS (-_-).
 
-  ```
-  python -m venv myenv
-  myenv\Scripts\activate.bat # Linux/MacOS source myenv/bin/activate  
-  ```
+```
+	python -m venv myenv
+	myenv\Scripts\activate.bat # Linux/MacOS source myenv/bin/activate  
+```
 
 3. **Install Dependencies**
 ```
@@ -93,10 +92,10 @@ python manage.py runserver
 - Ensure Docker is  installed.
 - Build and run the project using Docker :
 
-  ```
+```
   docker image build -t <imgname> . #when you are in root directory
   docker container run -d -p 8000:8000 --name <containername> <imagename>
-  ```
+```
 - Set the ports accordingly.
 - The application will be available at the same local address.
 - Also when you dockerize without the database(as you should(i think)), and don't want to create a superuser everytime, use the shell script I included, and run that in the docker file.
