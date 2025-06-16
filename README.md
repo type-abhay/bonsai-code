@@ -47,8 +47,8 @@ Follow these steps to build and run the project locally:
 1. **Clone the Repository**
 
 ```
-	git clone <repository_url>
-	cd <project_directory>
+git clone <repository_url>
+cd <project_directory>
 ```
 
 2. **Set Up Python Environment**
@@ -58,13 +58,13 @@ Follow these steps to build and run the project locally:
 - I used CMD as my terminal, the command below is to activate the Virtual ENV works for CMD in windows. Figure out on your own if you use PS (-_-).
 
 ```
-	python -m venv myenv
-	myenv\Scripts\activate.bat # Linux/MacOS source myenv/bin/activate  
+python -m venv myenv
+myenv\Scripts\activate.bat # Linux/MacOS source myenv/bin/activate  
 ```
 
 3. **Install Dependencies**
 ```
-	pip install -r requirements.txt
+pip install -r requirements.txt
 ````
 
 4. **Set Up Django Environment Variables**
@@ -93,8 +93,8 @@ python manage.py runserver
 - Build and run the project using Docker :
 
 ```
-  docker image build -t <imgname> . #when you are in root directory
-  docker container run -d -p 8000:8000 --name <containername> <imagename>
+docker image build -t <imgname> . #when you are in root directory
+docker container run -d -p 8000:8000 --name <containername> <imagename>
 ```
 - Set the ports accordingly.
 - The application will be available at the same local address.
