@@ -1,4 +1,6 @@
-# Project README
+# Online Judge Platform
+A fairly simple and straightforward Online Judge Platform for you to hone your skills on, additionally you get access to AI Review with respect to the problem and your code in just a click and has a Online Compiler for everyone if god forbid you lose access to your code editor.
+...
 
 ## About the Project
 
